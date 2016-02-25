@@ -1,5 +1,23 @@
-## cordova platforms
+## cordova platforms android
+# Non-project-specific build files:
+platforms/android/build.xml
+local.properties
+platforms/android/gradlew
+platforms/android/gradlew.bat
+platforms/android/gradle
+# Ant builds
+ant-build
+ant-gen
+# Eclipse builds
+gen
+out
+# Gradle builds
+platforms/android/build
 
+## cordova platforms browser
+platforms/browser/build
+
+## cordova platforms ios
 *.mode1v3
 *.perspectivev3
 *.pbxuser
