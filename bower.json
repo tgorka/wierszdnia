@@ -1,0 +1,27 @@
+{
+  "name": "wierszdnia",
+  "description": "Presenting poem of the day",
+  "main": "index.html",
+  "authors": [
+    "Tomasz Gorka"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "wiersz",
+    "dzien",
+    "poem",
+    "day",
+    "powiadomienie"
+  ],
+  "homepage": "https://github.com/tgorka/wierszdnia",
+  "moduleType": [
+    "es6"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

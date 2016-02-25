@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/tgorka/wierszdnia/issues"
   },
-  "homepage": "https://github.com/tgorka/wierszdnia"
+  "homepage": "https://github.com/tgorka/wierszdnia",
+  "devDependencies": {
+    "bower": "^1.7.7"
+  }
 }
