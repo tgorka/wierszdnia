@@ -1,3 +1,11 @@
+## cordova platforms
+
+*.mode1v3
+*.perspectivev3
+*.pbxuser
+.DS_Store
+platforms/ios/build/
+
 ### Windows template
 # Windows image file caches
 Thumbs.db
