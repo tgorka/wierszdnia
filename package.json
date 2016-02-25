@@ -2,7 +2,7 @@
   "name": "wierszdnia",
   "version": "0.0.1",
   "description": "Presenting poem of the day",
-  "main": "index.html",
+  "main": "www/index.html",
   "scripts": {
     "test": "test"
   },
