@@ -29,9 +29,53 @@ gulp.task('sass', function(done) {
 });
 
 // build develop
-gulp.task('build', ['sass'], function(done) {
+gulp.task('debug', ['sass'], function(done) {
     cordova.build({
         "platforms": ['android'],
+        "options": {
+            argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
+        }
+    }, done);
+});
+
+// gulp run
+// on connected android device with usb debug on
+gulp.task('run', ['sass'], function(done) {
+    cordova.run({
+        "platforms": ['android'],
+        "options": {
+            argv: ['--device', '--debug', '--nobuild', '--gradleArg=--no-daemon']
+        }
+    }, done);
+});
+
+// gulp emulate
+// run android emulator with the device
+gulp.task('androidemulate', ['sass'], function(done) {
+    cordova.emulate({
+        "platforms": ['android'],
+        "options": {
+            argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
+        }
+    }, done);
+});
+
+// gulp emulate
+// run android emulator with the device
+gulp.task('iosemulate', ['sass'], function(done) {
+    cordova.emulate({
+        "platforms": ['ios'],
+        "options": {
+            argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
+        }
+    }, done);
+});
+
+// gulp emulate
+// run android emulator with the device
+gulp.task('browseremulate', ['sass'], function(done) {
+    cordova.emulate({
+        "platforms": ['browser'],
         "options": {
             argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
         }

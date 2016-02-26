@@ -1,6 +1,7 @@
 ## cordova build properties
 /build.json
 /platforms/android/*-signing.properties
+/www/css/*.css
 
 ## cordova platforms android
 # Non-project-specific build files:
