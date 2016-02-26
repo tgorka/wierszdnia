@@ -38,13 +38,24 @@ gulp.task('debug', ['sass'], function(done) {
     }, done);
 });
 
-// gulp run
+// gulp runandroid
 // on connected android device with usb debug on
-gulp.task('run', ['sass'], function(done) {
+gulp.task('runandroid', ['sass'], function(done) {
     cordova.run({
         "platforms": ['android'],
         "options": {
-            argv: ['--device', '--debug', '--nobuild', '--gradleArg=--no-daemon']
+            argv: ['--device']
+        }
+    }, done);
+});
+
+// gulp runios
+// on connected android device with usb debug on
+gulp.task('runios', ['sass'], function(done) {
+    cordova.run({
+        "platforms": ['ios'],
+        "options": {
+            argv: ['--device']
         }
     }, done);
 });
