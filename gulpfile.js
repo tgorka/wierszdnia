@@ -7,11 +7,14 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var del = require('del');
 var cordova = require('cordova-lib').cordova;
+var typescript = require('gulp-typescript');
 
 var paths = {};
 paths.sass =  ['./scss/**/*.scss'];
+paths.ts = ['./ts/**/*.ts'];
 paths.app = './www/';
 paths.css = paths.app + 'css/';
+paths.js = paths.app + 'js/';
 
 // gulp sass
 // compress sass into css folder and minify
@@ -26,6 +29,17 @@ gulp.task('sass', function(done) {
         .pipe(rename({ extname: '.min.css' }))
         .pipe(gulp.dest(paths.css))
         .on('end', done);
+});
+
+// gulp typescript
+// compile typescript into js folder and minify and change to ES5
+gulp.task('typescript', function () {
+    return gulp.src(paths.ts)
+            .pipe(typescript({
+                noImplicitAny: true,
+                out: 'app.min.js'
+            }))
+            .pipe(gulp.dest(paths.js));
 });
 
 // build develop
