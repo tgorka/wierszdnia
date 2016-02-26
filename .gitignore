@@ -1,3 +1,6 @@
+## cordova build properties
+/build.json
+
 ## cordova platforms android
 # Non-project-specific build files:
 platforms/android/build.xml
