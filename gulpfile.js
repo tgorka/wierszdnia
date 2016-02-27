@@ -46,8 +46,8 @@ gulp.task('typescript', function () {
                 allowJs: true,
                 target: 'ES5',
                 exclude: ['node_modules', 'bower_components'],
-                //outDir: paths.js
-                outFile: 'app.min.js'
+                outDir: paths.js
+                //outFile: 'app.min.js'
             }))
             .pipe(gulp.dest(paths.js));
 });
@@ -55,7 +55,7 @@ gulp.task('typescript', function () {
 // build develop
 gulp.task('debug', ['sass', 'typescript'], function(done) {
     cordova.build({
-        "platforms": ['android'],
+        "platforms": ['browser'],
         "options": {
             argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
         }
@@ -137,7 +137,7 @@ gulp.task('default', ['sass', 'typescript']);
 gulp.task('watch', ['sass', 'typescript', 'browseremulate'], function() {
     gulp.watch(paths.sass, ['sass']);
     gulp.watch(paths.ts, ['typescript']);
-    //gulp.watch(paths.www, ['browseremulate']);
+    gulp.watch(paths.www, ['debug']);
 });
 
 // gulp clean

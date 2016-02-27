@@ -45,35 +45,55 @@
         <meta name=application-name content="WierszDnia">
         <meta name="description" content="Presenting poem of the day." />
         <meta name="author" content="Tomasz Górka http://tomasz.gorka.org.pl">
-            <!-- Open Graph Document Information (ex for Facebook meta information for posts) -->
-            <!-- Facebook needs image that has at least 200px x 200px -->
+        <!-- Open Graph Document Information (ex for Facebook meta information for posts) -->
+        <!-- Facebook needs image that has at least 200px x 200px -->
         <meta property="og:image" content="app/img/v_256.png"/>
         <meta property="og:site_name" content="WierszDnia"/>
         <meta property="og:title" content="WierszDnia"/>
         <meta property="og:description" content="Presenting poem of the day."/>
         <meta property="og:type" content="website"/>
 
-            <!-- DNS used in the page to preftch -->
+        <!-- DNS used in the page to preftch -->
         <meta http-equiv='x-dns-prefetch-control' content='on'>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
 
-            <!-- fav icons -->
+        <!-- fav icons -->
         <link rel="icon" href="app/img/v_16.png"  sizes="16x16"   type="image/png">
         <link rel="icon" href="app/img/v_32.png"  sizes="32x32"   type="image/png">
         <link rel="icon" href="app/img/v_256.png" sizes="256x256" type="image/png">
 
         <link rel="stylesheet" type="text/css" href="css/main.min.css">
 
-        <title>Wiersz Dnia1</title>
+        <!-- IE required polyfills, in this exact order -->
+        <!-- TODO: move it somewhere from node_modules -->
+        <script src="../node_modules/es6-shim/es6-shim.min.js"></script>
+        <script src="../node_modules/systemjs/dist/system-polyfills.js"></script>
+
+        <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="../node_modules/systemjs/dist/system.src.js"></script>
+        <script src="../node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+
+        <!-- SystemJS config -->
+        <script>
+            System.config({
+                packages: {
+                    js: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+            System.import('js/main')
+                  .then(null, console.error.bind(console));
+        </script>
+
+        <title>Wiersz Dnia</title>
     </head>
     <body>
-        <main>Loading...</main>
-
-        <div class="app">
-            <h1>Wiersz dnia</h1>
-            <p>Aplikacja w budowiey</p>
-        </div>
+        <!-- Main application loading -->
+        <app>Loading...</app>
+        <!-- Cordova application script at the end -->
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/app.min.js"></script>
     </body>
 </html>
