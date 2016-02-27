@@ -12,6 +12,6 @@ import {Component} from 'angular2/core';
 export class Main {
 
     // Declaring the variable for binding with initial value
-    yourName: string = '';
+    yourName: string = 'test5';
 
 }

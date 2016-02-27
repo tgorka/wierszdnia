@@ -12,6 +12,7 @@ var typescript = require('gulp-typescript');
 var paths = {};
 paths.sass =  ['./scss/**/*.scss'];
 paths.ts = ['./typings/**/*.d.ts', './ts/**/*.ts'];
+paths.www = ['./www/**/*'];
 paths.app = './www/';
 paths.css = paths.app + 'css/';
 paths.js = paths.app + 'js/';
@@ -89,7 +90,7 @@ gulp.task('androidemulate', ['sass', 'typescript'], function(done) {
     cordova.emulate({
         "platforms": ['android'],
         "options": {
-            argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
+            argv: ['--debug', '--nobuild', '--live-reload', '--gradleArg=--no-daemon']
         }
     }, done);
 });
@@ -100,7 +101,7 @@ gulp.task('iosemulate', ['sass', 'typescript'], function(done) {
     cordova.emulate({
         "platforms": ['ios'],
         "options": {
-            argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
+            argv: ['--debug', '--nobuild', '--live-reload', '--gradleArg=--no-daemon']
         }
     }, done);
 });
@@ -111,7 +112,7 @@ gulp.task('browseremulate', ['sass', 'typescript'], function(done) {
     cordova.emulate({
         "platforms": ['browser'],
         "options": {
-            argv: ['--debug', '--nobuild', '--gradleArg=--no-daemon']
+            argv: ['--debug', '--nobuild', '--live-reload', '--gradleArg=--no-daemon']
         }
     }, done);
 });
@@ -134,8 +135,9 @@ gulp.task('default', ['sass', 'typescript']);
 // gulp watch
 // watch changes on sass files and run process if change
 gulp.task('watch', ['sass', 'typescript', 'browseremulate'], function() {
-    gulp.watch(paths.sass, ['sass', 'browseremulate']);
-    gulp.watch(paths.ts, ['typescript', 'browseremulate']);
+    gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.ts, ['typescript']);
+    //gulp.watch(paths.www, ['browseremulate']);
 });
 
 // gulp clean

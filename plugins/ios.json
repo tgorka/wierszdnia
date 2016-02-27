@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.gorkasoft.wierszdnia"
+        },
+        "cordova-plugin-browsersync": {
+            "PACKAGE_NAME": "com.gorkasoft.wierszdnia"
         }
     },
     "dependent_plugins": {}
