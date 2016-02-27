@@ -46,8 +46,8 @@ gulp.task('typescript', function () {
                 allowJs: true,
                 target: 'ES5',
                 exclude: ['node_modules', 'bower_components'],
-                outDir: paths.js
-                //outFile: 'app.min.js'
+                //outDir: paths.js
+                outFile: 'app.min.js'
             }))
             .pipe(gulp.dest(paths.js));
 });
