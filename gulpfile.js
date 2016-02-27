@@ -11,7 +11,7 @@ var typescript = require('gulp-typescript');
 
 var paths = {};
 paths.sass =  ['./scss/**/*.scss'];
-paths.ts = ['./ts/**/*.ts'];
+paths.ts = ['./typings/**/*.d.ts', './ts/**/*.ts'];
 paths.app = './www/';
 paths.css = paths.app + 'css/';
 paths.js = paths.app + 'js/';
@@ -37,13 +37,22 @@ gulp.task('typescript', function () {
     return gulp.src(paths.ts)
             .pipe(typescript({
                 noImplicitAny: true,
-                out: 'app.min.js'
+                module: 'system', /* System.register([dependencies], function) (in JS)*/
+                moduleResolution: 'node',
+                emitDecoratorMetadata: true,
+                experimentalDecorators: true, //ES7 feature
+                pretty: true,
+                allowJs: true,
+                target: 'ES5',
+                exclude: ['node_modules', 'bower_components'],
+                outDir: paths.js
+                //outFile: 'app.min.js'
             }))
             .pipe(gulp.dest(paths.js));
 });
 
 // build develop
-gulp.task('debug', ['sass'], function(done) {
+gulp.task('debug', ['sass', 'typescript'], function(done) {
     cordova.build({
         "platforms": ['android'],
         "options": {
@@ -54,7 +63,7 @@ gulp.task('debug', ['sass'], function(done) {
 
 // gulp runandroid
 // on connected android device with usb debug on
-gulp.task('runandroid', ['sass'], function(done) {
+gulp.task('runandroid', ['sass', 'typescript'], function(done) {
     cordova.run({
         "platforms": ['android'],
         "options": {
@@ -65,7 +74,7 @@ gulp.task('runandroid', ['sass'], function(done) {
 
 // gulp runios
 // on connected android device with usb debug on
-gulp.task('runios', ['sass'], function(done) {
+gulp.task('runios', ['sass', 'typescript'], function(done) {
     cordova.run({
         "platforms": ['ios'],
         "options": {
@@ -76,7 +85,7 @@ gulp.task('runios', ['sass'], function(done) {
 
 // gulp emulate
 // run android emulator with the device
-gulp.task('androidemulate', ['sass'], function(done) {
+gulp.task('androidemulate', ['sass', 'typescript'], function(done) {
     cordova.emulate({
         "platforms": ['android'],
         "options": {
@@ -87,7 +96,7 @@ gulp.task('androidemulate', ['sass'], function(done) {
 
 // gulp emulate
 // run android emulator with the device
-gulp.task('iosemulate', ['sass'], function(done) {
+gulp.task('iosemulate', ['sass', 'typescript'], function(done) {
     cordova.emulate({
         "platforms": ['ios'],
         "options": {
@@ -98,7 +107,7 @@ gulp.task('iosemulate', ['sass'], function(done) {
 
 // gulp emulate
 // run android emulator with the device
-gulp.task('browseremulate', ['sass'], function(done) {
+gulp.task('browseremulate', ['sass', 'typescript'], function(done) {
     cordova.emulate({
         "platforms": ['browser'],
         "options": {
@@ -109,7 +118,7 @@ gulp.task('browseremulate', ['sass'], function(done) {
 
 // gulp release
 // build all platforms for release
-gulp.task('release', ['sass'], function(done) {
+gulp.task('release', ['sass', 'typescript'], function(done) {
     cordova.build({
         "platforms": ['android', 'ios', 'browser'],
         "options": {
@@ -120,12 +129,13 @@ gulp.task('release', ['sass'], function(done) {
 
 // gulp
 // by default compress files
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'typescript']);
 
 // gulp watch
 // watch changes on sass files and run process if change
 gulp.task('watch', function() {
-    gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.sass, ['sass', 'browseremulate']);
+    gulp.watch(paths.ts, ['typescript', 'browseremulate']);
 });
 
 // gulp clean
@@ -133,6 +143,7 @@ gulp.task('watch', function() {
 // clean cordova app
 gulp.task('clean', function(done) {
     del([paths.css+'*.css'], done);
+    del([paths.js+'*.js'], done);
     cordova.clean({}, done);
 });
 
