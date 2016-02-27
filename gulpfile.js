@@ -16,6 +16,25 @@ paths.www = ['./www/**/*'];
 paths.app = './www/';
 paths.css = paths.app + 'css/';
 paths.js = paths.app + 'js/';
+paths.lib = paths.app + 'lib/';
+paths.nodeModules = './node_modules/';
+
+libs = [
+    // order is important
+    // IE required polyfills, in this exact order
+    paths.nodeModules + 'es6-shim/es6-shim.min.js',
+    paths.nodeModules + 'systemjs/dist/system-polyfills.js',
+
+    paths.nodeModules + 'angular2/bundles/angular2-polyfills.js',
+    paths.nodeModules + 'angular2/bundles/angular2-polyfills.min.js',
+    paths.nodeModules + 'systemjs/dist/system.src.js',
+    paths.nodeModules + 'systemjs/dist/system.js',
+    paths.nodeModules + 'rxjs/bundles/Rx.js',
+    paths.nodeModules + 'rxjs/bundles/Rx.min.js',
+    paths.nodeModules + 'angular2/bundles/angular2.dev.js',
+    paths.nodeModules + 'angular2/bundles/angular2.min.js'
+
+];
 
 // gulp sass
 // compress sass into css folder and minify
@@ -149,9 +168,17 @@ gulp.task('clean', function(done) {
     cordova.clean({}, done);
 });
 
+// gulp lib
+// copy libs from node_components to lib
+gulp.task('lib', function() {
+    return gulp.src(libs).
+        // compress, minify
+        pipe(gulp.dest(paths.lib));
+});
+
 // gulp install
 // install bower components
-gulp.task('install', [], function() {
+gulp.task('install', ['lib'], function() {
     return bower.commands.install()
         .on('log', function(data) {
             gutil.log('bower', gutil.colors.cyan(data.id), data.message);
