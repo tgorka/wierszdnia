@@ -133,7 +133,7 @@ gulp.task('default', ['sass', 'typescript']);
 
 // gulp watch
 // watch changes on sass files and run process if change
-gulp.task('watch', function() {
+gulp.task('watch', ['sass', 'typescript', 'browseremulate'], function() {
     gulp.watch(paths.sass, ['sass', 'browseremulate']);
     gulp.watch(paths.ts, ['typescript', 'browseremulate']);
 });
