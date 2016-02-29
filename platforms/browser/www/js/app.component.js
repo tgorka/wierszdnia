@@ -21,7 +21,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             AppComponent = (function () {
                 function AppComponent() {
                     // Declaring the variable for binding with initial value
-                    this.yourName = 'test5';
+                    this.name = 'test5';
                 }
                 AppComponent = __decorate([
                     core_1.Component({

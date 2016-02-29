@@ -13,6 +13,6 @@ import {Component} from 'angular2/core';
 export class AppComponent {
 
     // Declaring the variable for binding with initial value
-    yourName: string = 'test5';
+    name: string = 'test5';
 
 }
