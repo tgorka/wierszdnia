@@ -32,7 +32,9 @@ libs = [
     paths.nodeModules + 'rxjs/bundles/Rx.js',
     paths.nodeModules + 'rxjs/bundles/Rx.min.js',
     paths.nodeModules + 'angular2/bundles/angular2.dev.js',
-    paths.nodeModules + 'angular2/bundles/angular2.min.js'
+    paths.nodeModules + 'angular2/bundles/angular2.min.js',
+    paths.nodeModules + 'angular2/bundles/http.dev.js',
+    paths.nodeModules + 'angular2/bundles/http.min.js'
 
 ];
 

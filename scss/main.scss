@@ -5,3 +5,12 @@ in libraries _variables.scss file.
 
 // Include another scss
 //@import "bower_components/....scss";
+
+// import ng2-material component SCSS
+
+$md-font-url: "node_modules/ng2-material/dist/";
+@import "node_modules/ng2-material/dist/font.scss"; // to import scss not css
+@import "node_modules/ng2-material/source/core";
+$md-primary: md-palette($md-brown, 500, 100, 700, $md-contrast-palettes);
+$md-accent: md-palette($md-deep-orange, 500, 300, 700, $md-contrast-palettes);
+@import "node_modules/ng2-material/source/components";

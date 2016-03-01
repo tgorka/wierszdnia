@@ -5,15 +5,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('angular2/core');
+var http_1 = require('angular2/http');
+var poem_service_1 = require('./poem.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(poemService) {
+        this.poemService = poemService;
         // Declaring the variable for binding with initial value
-        this.yourName = 'test5';
+        this.name = 'test5';
+        //const poemService = new PoemService();
     }
     AppComponent = __decorate([
         core_1.Component({
             // Declare the tag name in index.html to where the component attaches
             selector: 'app',
+            providers: [http_1.HTTP_PROVIDERS, poem_service_1.PoemService],
             // Location of the template for this component
             templateUrl: 'html/app.html'
         })
