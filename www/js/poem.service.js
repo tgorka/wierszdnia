@@ -25,6 +25,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 function PoemService(http) {
                     var _this = this;
                     this.http = http;
+                    this.changingCount = 1000 * 60 * 60 * 24; // 24h
                     this.url = 'https://pafmon-walt-whitman-poems.p.mashape.com/poems';
                     this.headers = new http_1.Headers();
                     this.headers.append('X-Mashape-Key', 'KH1XkEAJffmshJPYDitcWCFu2WQap1dxX3Vjsn4r2K0K95C8vA');
@@ -33,7 +34,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.today = new Date();
                     setInterval(function () {
                         _this.today = new Date();
-                    }, 1000 * 60 * 60 * 24); // change every 24h
+                    }, this.changingCount); // change every 24h
                     this.poem = null;
                 }
                 PoemService.prototype.todaysPoem = function () {
@@ -71,7 +72,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 };
                 PoemService.prototype.download = function (url, parseFun) {
                     var _this = this;
-                    console.log('down', this.poem, url);
                     this.http.get(url, { headers: this.headers })
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) { return parseFun(data); }, function (err) { return _this.logError(err); }, function () { return console.log('Random Quote Complete'); });

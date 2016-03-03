@@ -2,23 +2,32 @@ import {Inject, Injectable} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 
 interface Poem {
-    id:String;
-    content:String;
-    name:String,
+    id:string;
+    content:string;
+    name:string,
     date:Date;
 }
+
+interface ServicePoem {
+    index:string,
+    title:string,
+    text:string,
+}
+
+declare type Callback = (data:Object) => void;
 
 @Injectable()
 export class PoemService {
 
     // properties
     private headers: Headers;
-    private url: String;
+    private url: string;
     private today:Date;
-
+    private changingCount:Number;
     private poem:Poem;
 
     constructor(private http:Http) {
+        this.changingCount = 1000*60*60*24; // 24h
         this.url = 'https://pafmon-walt-whitman-poems.p.mashape.com/poems';
 
         this.headers = new Headers();
@@ -29,7 +38,7 @@ export class PoemService {
         this.today = new Date();
         setInterval(() => {
             this.today = new Date();
-        }, 1000*60*60*24); // change every 24h
+        }, this.changingCount); // change every 24h
 
         this.poem = null;
     }
@@ -66,16 +75,15 @@ export class PoemService {
 
     private downloadPoems() {
         var self = this;
-        this.download(this.poemsUrl(), function(data) { self.parsePoems(data) });
+        this.download(this.poemsUrl(), function(data:Array<string>) { self.parsePoems(data) });
     }
 
-    private downloadPoem(poem:String) {
+    private downloadPoem(poem:string) {
         var self = this;
-        this.download(this.poemUrl(poem), function(data) { self.parsePoem(data) });
+        this.download(this.poemUrl(poem), function(data:ServicePoem) { self.parsePoem(data) });
     }
 
-    private download(url:String, parseFun) {
-        console.log('down', this.poem, url)
+    private download(url:string, parseFun:Callback) {
         this.http.get(url, { headers: this.headers })
             .map(res => res.json())
             .subscribe(
@@ -85,13 +93,13 @@ export class PoemService {
             );
     }
 
-    private parsePoem(poem) {
+    private parsePoem(poem:ServicePoem) {
         // set poem name and content
         this.poem.name = poem.title;
         this.poem.content = poem.text;
     }
 
-    private parsePoems(poems) {
+    private parsePoems(poems:Array<string>) {
         // set random poem id
         var randomIndex = Math.floor(Math.random() * poems.length);
         this.poem.id = poems[randomIndex];
@@ -99,7 +107,7 @@ export class PoemService {
         this.downloadPoem(this.poem.id);
     }
 
-    private poemUrl(poemId:String) {
+    private poemUrl(poemId:string) {
         return this.url + '/' + poemId;
     }
 
@@ -107,7 +115,7 @@ export class PoemService {
         return this.url;
     }
 
-    private logError(err) {
+    private logError(err:Object) {
         console.error('There was an error: ' + err);
     }
 }
