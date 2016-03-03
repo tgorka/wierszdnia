@@ -10,9 +10,8 @@ var poem_service_1 = require('./poem.service');
 var AppComponent = (function () {
     function AppComponent(poemService) {
         this.poemService = poemService;
-        // Declaring the variable for binding with initial value
-        this.name = 'test5';
-        //const poemService = new PoemService();
+        // properties
+        this.authorUrl = 'http://tomasz.gorka.org.pl';
     }
     AppComponent = __decorate([
         core_1.Component({
