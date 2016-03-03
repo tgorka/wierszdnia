@@ -27,9 +27,8 @@ System.register(['angular2/core', 'angular2/http', './poem.service'], function(e
             AppComponent = (function () {
                 function AppComponent(poemService) {
                     this.poemService = poemService;
-                    // Declaring the variable for binding with initial value
-                    this.name = 'test5';
-                    //const poemService = new PoemService();
+                    // properties
+                    this.authorUrl = 'http://tomasz.gorka.org.pl';
                 }
                 AppComponent = __decorate([
                     core_1.Component({

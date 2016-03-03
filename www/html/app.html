@@ -2,7 +2,7 @@
     <h2>Poem of the day</h2>
     <span flex></span>
     <span>
-        <button class="md-raised md-primary" md-raised-button>next poem</button>
+        <button class="md-raised md-primary" md-raised-button (click)="poemService.randomPoem()">next random poem</button>
     </span>
 </md-toolbar>
 <md-content>
@@ -17,5 +17,5 @@
 </md-content>
 <footer class="md-caption container md-padding" layout="row" layout-align="center center">
     <span flex="50" layout="row" layout-align="start center">Poem of the day. 2016.</span>
-    <span flex="50" layout="row" layout-align="end center">Created by: <a breakaction="show" href="http://tomasz.gorka.org.pl" target="_blank">Tomasz Górka</a></span>
+    <span flex="50" layout="row" layout-align="end center">Created by: <a breakaction="show" [href]="authorUrl" target="_blank">Tomasz Górka</a></span>
 </footer>

@@ -1,2 +1,21 @@
-<h1>{{poemService.todaysPoemName()}}</h1>
-<p>{{poemService.todaysPoem()}}</p>
+<md-toolbar class="md-toolbar-tools">
+    <h2>Poem of the day</h2>
+    <span flex></span>
+    <span>
+        <button class="md-raised md-primary" md-raised-button (click)="poemService.randomPoem()">next random poem</button>
+    </span>
+</md-toolbar>
+<md-content>
+    <section class="md-scroll-y">
+        <md-card>
+            <md-card-title>
+                <h3>{{poemService.todaysPoemName()}}</h3>
+            </md-card-title>
+            <md-card-content>{{poemService.todaysPoem()}}</md-card-content>
+        </md-card>
+    </section>
+</md-content>
+<footer class="md-caption container md-padding" layout="row" layout-align="center center">
+    <span flex="50" layout="row" layout-align="start center">Poem of the day. 2016.</span>
+    <span flex="50" layout="row" layout-align="end center">Created by: <a breakaction="show" [href]="authorUrl" target="_blank">Tomasz Górka</a></span>
+</footer>

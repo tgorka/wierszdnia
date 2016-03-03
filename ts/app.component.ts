@@ -18,11 +18,10 @@ import {PoemService} from './poem.service';
 })
 export class AppComponent {
 
-    constructor(public poemService: PoemService) {
-        //const poemService = new PoemService();
-    }
+    // properties
+    private authorUrl:string = 'http://tomasz.gorka.org.pl';
 
-    // Declaring the variable for binding with initial value
-    name: string = 'test5';
+    constructor(public poemService: PoemService) {
+    }
 
 }
