@@ -74,7 +74,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var _this = this;
                     this.http.get(url, { headers: this.headers })
                         .map(function (res) { return res.json(); })
-                        .subscribe(function (data) { return parseFun(data); }, function (err) { return _this.logError(err); }, function () { return console.log('Random Quote Complete'); });
+                        .subscribe(function (data) { return parseFun(data); }, function (err) { return _this.logError(err); });
                 };
                 PoemService.prototype.parsePoem = function (poem) {
                     // set poem name and content

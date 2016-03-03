@@ -88,8 +88,7 @@ export class PoemService {
             .map(res => res.json())
             .subscribe(
                 data => parseFun(data),
-                err => this.logError(err),
-                () => console.log('Random Quote Complete')
+                err => this.logError(err)
             );
     }
 
