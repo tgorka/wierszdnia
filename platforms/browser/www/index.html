@@ -68,11 +68,19 @@
         <script src="lib/es6-shim.min.js"></script>
         <script src="lib/system-polyfills.js"></script>
 
-        <script src="lib/angular2-polyfills.js"></script>
+        <!-- Dev mode -->
+        <!--<script src="lib/angular2-polyfills.js"></script>
         <script src="lib/system.src.js"></script>
         <script src="lib/Rx.js"></script>
         <script src="lib/angular2.dev.js"></script>
-        <script src="lib/http.dev.js"></script>
+        <script src="lib/http.dev.js"></script>-->
+
+        <!-- Prod mode -->
+        <script src="lib/angular2-polyfills.min.js"></script>
+        <script src="lib/system.js"></script>
+        <script src="lib/Rx.min.js"></script>
+        <script src="lib/angular2.min.js"></script>
+        <script src="lib/http.min.js"></script>
 
         <!-- SystemJS config -->
         <script>
