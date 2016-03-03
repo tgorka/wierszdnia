@@ -35,7 +35,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: ws: 'unsafe-inline' https://ssl.gstatic.com 'unsafe-eval'; connect-src 'self' https://pafmon-walt-whitman-poems.p.mashape.com; style-src 'self' 'unsafe-inline'; media-src *">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -45,35 +45,55 @@
         <meta name=application-name content="WierszDnia">
         <meta name="description" content="Presenting poem of the day." />
         <meta name="author" content="Tomasz Górka http://tomasz.gorka.org.pl">
-            <!-- Open Graph Document Information (ex for Facebook meta information for posts) -->
-            <!-- Facebook needs image that has at least 200px x 200px -->
+        <!-- Open Graph Document Information (ex for Facebook meta information for posts) -->
+        <!-- Facebook needs image that has at least 200px x 200px -->
         <meta property="og:image" content="app/img/v_256.png"/>
         <meta property="og:site_name" content="WierszDnia"/>
         <meta property="og:title" content="WierszDnia"/>
         <meta property="og:description" content="Presenting poem of the day."/>
         <meta property="og:type" content="website"/>
 
-            <!-- DNS used in the page to preftch -->
+        <!-- DNS used in the page to preftch -->
         <meta http-equiv='x-dns-prefetch-control' content='on'>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
 
-            <!-- fav icons -->
+        <!-- fav icons -->
         <link rel="icon" href="app/img/v_16.png"  sizes="16x16"   type="image/png">
         <link rel="icon" href="app/img/v_32.png"  sizes="32x32"   type="image/png">
         <link rel="icon" href="app/img/v_256.png" sizes="256x256" type="image/png">
 
         <link rel="stylesheet" type="text/css" href="css/main.min.css">
 
+        <!-- IE required polyfills, in this exact order -->
+        <script src="lib/es6-shim.min.js"></script>
+        <script src="lib/system-polyfills.js"></script>
+
+        <script src="lib/angular2-polyfills.js"></script>
+        <script src="lib/system.src.js"></script>
+        <script src="lib/Rx.js"></script>
+        <script src="lib/angular2.dev.js"></script>
+        <script src="lib/http.dev.js"></script>
+
+        <!-- SystemJS config -->
+        <script>
+            System.config({
+                packages: {
+                    js: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+            System.import('js/main')
+                  .then(null, console.error.bind(console));
+        </script>
+
         <title>Wiersz Dnia</title>
     </head>
     <body>
-        <main>Loading...</main>
-
-        <div class="app">
-            <h1>Wiersz dnia</h1>
-            <p>Aplikacja w budowie</p>
-        </div>
+        <!-- Main application loading -->
+        <app>Loading...</app>
+        <!-- Cordova application script at the end -->
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/app.min.js"></script>
     </body>
 </html>
