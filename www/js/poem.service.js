@@ -23,17 +23,76 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
         execute: function() {
             PoemService = (function () {
                 function PoemService(http) {
-                    this.http = http;
-                }
-                PoemService.prototype.getRandomPoem = function () {
                     var _this = this;
-                    this.http.get('http://gazeta.pl')
-                        .map(function (res) { return res.text(); })
-                        .subscribe(function (data) { return _this.parsePoem(data); }, function (err) { return _this.logError(err); }, function () { return console.log('Random Quote Complete'); });
-                    return "wlazl konek na plotek i mruga...";
+                    this.http = http;
+                    this.url = 'https://pafmon-walt-whitman-poems.p.mashape.com/poems';
+                    this.headers = new http_1.Headers();
+                    this.headers.append('X-Mashape-Key', 'KH1XkEAJffmshJPYDitcWCFu2WQap1dxX3Vjsn4r2K0K95C8vA');
+                    this.headers.append('Accept', 'application/json');
+                    // set date and change it every day
+                    this.today = new Date();
+                    setInterval(function () {
+                        _this.today = new Date();
+                    }, 1000 * 60 * 60 * 24); // change every 24h
+                    this.poem = null;
+                }
+                PoemService.prototype.todaysPoem = function () {
+                    if (this.poem == null || this.poem.date != this.today) {
+                        this.randomPoem();
+                    }
+                    return (this.poem != null && this.poem.content != null) ?
+                        this.poem.content : 'Loading poem...';
+                };
+                PoemService.prototype.todaysPoemName = function () {
+                    if (this.poem == null || this.poem.date != this.today) {
+                        this.randomPoem();
+                    }
+                    return (this.poem != null && this.poem.name != null) ?
+                        this.poem.name : '';
+                };
+                PoemService.prototype.randomPoem = function () {
+                    // set poem with date and id
+                    this.poem = {
+                        date: this.today,
+                        id: null,
+                        name: null,
+                        content: null
+                    };
+                    // downloand poems
+                    this.downloadPoems();
+                };
+                PoemService.prototype.downloadPoems = function () {
+                    var self = this;
+                    this.download(this.poemsUrl(), function (data) { self.parsePoems(data); });
+                };
+                PoemService.prototype.downloadPoem = function (poem) {
+                    var self = this;
+                    this.download(this.poemUrl(poem), function (data) { self.parsePoem(data); });
+                };
+                PoemService.prototype.download = function (url, parseFun) {
+                    var _this = this;
+                    console.log('down', this.poem, url);
+                    this.http.get(url, { headers: this.headers })
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (data) { return parseFun(data); }, function (err) { return _this.logError(err); }, function () { return console.log('Random Quote Complete'); });
                 };
                 PoemService.prototype.parsePoem = function (poem) {
-                    console.log('parse poem:', poem);
+                    // set poem name and content
+                    this.poem.name = poem.title;
+                    this.poem.content = poem.text;
+                };
+                PoemService.prototype.parsePoems = function (poems) {
+                    // set random poem id
+                    var randomIndex = Math.floor(Math.random() * poems.length);
+                    this.poem.id = poems[randomIndex];
+                    //download this random poem
+                    this.downloadPoem(this.poem.id);
+                };
+                PoemService.prototype.poemUrl = function (poemId) {
+                    return this.url + '/' + poemId;
+                };
+                PoemService.prototype.poemsUrl = function () {
+                    return this.url;
                 };
                 PoemService.prototype.logError = function (err) {
                     console.error('There was an error: ' + err);
