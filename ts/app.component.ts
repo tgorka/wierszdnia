@@ -11,6 +11,8 @@ import {PoemService} from './poem.service';
 
     providers: [HTTP_PROVIDERS, PoemService],
 
+    directives: [MATERIAL_DIRECTIVES],
+
     // Location of the template for this component
     templateUrl: 'html/app.html'
     //template: '<h1>Angular 2 App</h1>'

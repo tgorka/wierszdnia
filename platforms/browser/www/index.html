@@ -69,11 +69,14 @@
         <script src="lib/system-polyfills.js"></script>
 
         <!-- Dev mode -->
-        <!--<script src="lib/angular2-polyfills.js"></script>
+        <!--
+        <script src="lib/angular2-polyfills.js"></script>
         <script src="lib/system.src.js"></script>
         <script src="lib/Rx.js"></script>
         <script src="lib/angular2.dev.js"></script>
-        <script src="lib/http.dev.js"></script>-->
+        <script src="lib/http.dev.js"></script>
+        <script src="lib/ng2-material.js"></script>
+        -->
 
         <!-- Prod mode -->
         <script src="lib/angular2-polyfills.min.js"></script>
@@ -81,13 +84,22 @@
         <script src="lib/Rx.min.js"></script>
         <script src="lib/angular2.min.js"></script>
         <script src="lib/http.min.js"></script>
+        <script src="lib/ng2-material.min.js"></script>
+        <script src="lib/all.webpack.js"></script>
+        <script src="lib/all.webpack.styles.js"></script>
 
         <!-- SystemJS config -->
         <script>
             System.config({
+                map: {
+                    "ng2-material":"https://cdn.rawgit.com/justindujardin/ng2-material/gh-pages/v/0.2.5/ng2-material"
+                },
                 packages: {
                     js: {
                         format: 'register',
+                        defaultExtension: 'js'
+                    },
+                    'ng2-material': {
                         defaultExtension: 'js'
                     }
                 }
@@ -103,5 +115,37 @@
         <app>Loading...</app>
         <!-- Cordova application script at the end -->
         <script type="text/javascript" src="cordova.js"></script>
+
+         <div class="container">
+                <div onclick="scheduleDelayed()">In 5 sec<br /><span>schedule(1, firstAt:later)</span></div>
+                <div onclick="scheduleMinutely()">Every min<br /><span>schedule(1, every:minute)</span></div>
+            </div>
+
+        <script>
+            scheduleDelayed = function () {
+                var now = new Date().getTime(),
+                    _5_sec_from_now = new Date(now + 5 * 1000);
+                var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+                cordova.plugins.notification.local.schedule({
+                    id: 1,
+                    title: 'Scheduled with delay',
+                    text: 'Test Message 1',
+                    at: _5_sec_from_now,
+                    //sound: sound,
+                    badge: 12
+                });
+            };
+            scheduleMinutely = function () {
+                var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+                cordova.plugins.notification.local.schedule({
+                    id: 1,
+                    text: 'Scheduled every minute',
+                    every: 'minute'//,
+                    //sound: sound,
+                    //icon: 'res://icon',
+                    //smallIcon: 'res://ic_popup_sync'
+                });
+            };
+        </script>
     </body>
 </html>

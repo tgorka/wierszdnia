@@ -34,7 +34,13 @@ libs = [
     paths.nodeModules + 'angular2/bundles/angular2.dev.js',
     paths.nodeModules + 'angular2/bundles/angular2.min.js',
     paths.nodeModules + 'angular2/bundles/http.dev.js',
-    paths.nodeModules + 'angular2/bundles/http.min.js'
+    paths.nodeModules + 'angular2/bundles/http.min.js',
+
+    paths.nodeModules + 'ng2-material/dist/ng2-material.js',
+    paths.nodeModules + 'ng2-material/dist/ng2-material.min.js',
+    paths.nodeModules + 'ng2-material/all.webpack.js',
+    paths.nodeModules + 'ng2-material/all.webpack.styles.js',
+    paths.nodeModules + 'ng2-material/all.js'
 
 ];
 

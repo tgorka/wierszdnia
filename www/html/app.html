@@ -1,9 +1,17 @@
 <md-toolbar class="md-toolbar-tools">
+    <button class="md-icon-button md-primary" md-button aria-label="Settings">
+        <i md-icon>menu</i>
+    </button>
     <h2>Poem of the day</h2>
     <span flex></span>
     <span>
-        <button class="md-raised md-primary" md-raised-button (click)="poemService.randomPoem()">next random poem</button>
+        <button class="md-raised md-primary" md-raised-button (click)="poemService.randomPoem()" aria-label="Next">
+            <i>next random poem</i>
+        </button>
     </span>
+    <button class="md-icon-button" md-button aria-label="More">
+        <i md-icon>more_vert</i>
+    </button>
 </md-toolbar>
 <md-content>
     <section class="md-scroll-y">
@@ -17,6 +25,8 @@
         </md-card>
     </section>
 </md-content>
+
+
 <footer class="md-caption container md-padding" layout="row" layout-align="center center">
     <span flex="50" layout="row" layout-align="start center">Poem of the day. 2016.</span>
     <span flex="50" layout="row" layout-align="end center">Created by: <a breakaction="show" [href]="authorUrl" target="_blank">Tomasz Górka</a></span>

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', './poem.service'], function(exports_1, context_1) {
+System.register(['angular2/core', "ng2-material/all", 'angular2/http', './poem.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core', 'angular2/http', './poem.service'], function(e
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, poem_service_1;
+    var core_1, all_1, http_1, poem_service_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (all_1_1) {
+                all_1 = all_1_1;
             },
             function (http_1_1) {
                 http_1 = http_1_1;
@@ -35,6 +38,7 @@ System.register(['angular2/core', 'angular2/http', './poem.service'], function(e
                         // Declare the tag name in index.html to where the component attaches
                         selector: 'app',
                         providers: [http_1.HTTP_PROVIDERS, poem_service_1.PoemService],
+                        directives: [all_1.MATERIAL_DIRECTIVES],
                         // Location of the template for this component
                         templateUrl: 'html/app.html'
                     }), 
